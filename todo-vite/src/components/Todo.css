@@ -1,0 +1,16 @@
+.list {
+  list-style: none;
+  border: 1px solid black;
+  width: 70%;
+  margin: auto;
+}
+
+.item-list {
+  height: 20px;
+}
+
+.todo-section {
+  width: 80%;
+  margin: auto;
+  margin-top: 50px;
+}
