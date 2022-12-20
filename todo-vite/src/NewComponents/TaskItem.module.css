@@ -1,0 +1,19 @@
+.list {
+  border: 1px solid grey;
+  margin: 5px;
+  border-radius: 10px;
+}
+
+/* .item-list {
+  } */
+
+.item-date {
+  font-size: 14px;
+  display: block;
+  color: grey;
+}
+
+.details {
+  font-size: 17px;
+  max-width: 300px;
+}

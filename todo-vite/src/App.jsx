@@ -1,11 +1,21 @@
 import "./App.css";
-import Todo from "./Components/Todo";
+import Todo from "./NewComponents/Todo";
 
 import React from "react";
 
-function App() {
-  return <Todo />;
-  //
+class App extends React.Component {
+  constructor() {
+    super();
+  }
+
+  render() {
+    return (
+      <div>
+        <Todo />
+      </div>
+    );
+    //
+  }
 }
 
 export default App;
