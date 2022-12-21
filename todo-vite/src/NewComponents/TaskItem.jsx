@@ -1,6 +1,7 @@
 import React from "react";
 import { ListItem, ListItemText, Button, TextField } from "@mui/material";
 import styles from "./TaskItem.module.css";
+import DateCreated from "./DateCreated";
 
 class TaskItem extends React.Component {
   constructor(props) {
@@ -21,9 +22,8 @@ class TaskItem extends React.Component {
           primaryTypographyProps={{ fontSize: "20px" }}
         >
           {task.taskName}
-          <span className={styles["item-date"]}>
-            created on {"20 December 2022"}
-          </span>
+
+          <DateCreated className={styles["item-date"]} getDate={task.date} />
           {showDetails && (
             <div className={styles.details}>{task.taskDetails}</div>
           )}
@@ -38,7 +38,6 @@ class TaskItem extends React.Component {
         >
           {showDetails ? "Hide" : "Details"}
         </Button>
-        <Button style={{ marginRight: "10px" }}>Edit</Button>
 
         {this.props.children}
       </ListItem>
