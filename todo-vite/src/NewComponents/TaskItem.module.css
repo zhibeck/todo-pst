@@ -11,6 +11,8 @@
   font-size: 14px;
   display: block;
   color: grey;
+  margin-top: -5px;
+  font-style: italic;
 }
 
 .details {
