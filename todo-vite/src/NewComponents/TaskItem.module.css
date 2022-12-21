@@ -17,3 +17,15 @@
   font-size: 17px;
   max-width: 300px;
 }
+
+.item-list-completed {
+  /* italic, strike-through */
+  color: rgb(75, 76, 143);
+  text-decoration: line-through;
+}
+
+.complete-checkbox {
+  margin: 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+}
