@@ -7,17 +7,32 @@ class TaskItem extends React.Component {
     super(props);
     this.state = {
       showDetails: false,
+      isComplete: false,
     };
   }
 
   render() {
-    const task = this.props.getTask;
-    const { showDetails } = this.state;
+    const { getTask } = this.props;
+    const task = getTask;
+    const { showDetails, isComplete } = this.state;
 
     return (
       <ListItem className={styles.list} key={task.id}>
+        <input
+          type="checkbox"
+          className={styles["complete-checkbox"]}
+          onClick={() => {
+            this.setState({
+              isComplete: !isComplete,
+            });
+            // console.log(isComplete);
+          }}
+        />
         <ListItemText
-          className={styles["item-list"]}
+          // className={styles["item-list"]}
+          className={
+            isComplete ? styles["item-list-completed"] : styles["item-list"]
+          }
           primaryTypographyProps={{ fontSize: "20px" }}
         >
           {task.taskName}
@@ -28,6 +43,7 @@ class TaskItem extends React.Component {
             <div className={styles.details}>{task.taskDetails}</div>
           )}
         </ListItemText>
+
         <Button
           variant="contained"
           onClick={() =>
