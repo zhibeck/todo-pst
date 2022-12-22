@@ -1,10 +1,10 @@
 import React from "react";
-import { ListItem, ListItemText, Button, TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import TaskItem from "./TaskItem";
 // import styles from "./TaskList.module.css";
 import DeleteBtn from "./DeleteBtn";
 import EditBtn from "./EditBtn";
-
+import AddTask from "./AddTask";
 const TASKS_DATA = [
   {
     id: "e1",
@@ -31,13 +31,11 @@ class TaskList extends React.Component {
       newDetails: "",
     };
   }
-
   handleDelete = (tasksArray) => {
     this.setState({
       tasks: tasksArray,
     });
   };
-
   handleTask = (tasksArray) => {
     console.log(tasksArray);
     this.setState({
@@ -50,64 +48,16 @@ class TaskList extends React.Component {
       tasks: tasksArray,
     });
   };
-
-  addNewTask = (event) => {
-    const newTask = event.target.value;
+  handleAddTask = (newTask) => {
     this.setState({
-      newTask: newTask,
+      tasks: [newTask, ...this.state.tasks],
     });
-    console.log(newTask);
   };
-
-  addNewDetails = (event) => {
-    const newDetails = event.target.value;
-
-    this.setState({
-      newDetails: newDetails,
-    });
-
-    console.log(newDetails);
-  };
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-    this.setState({
-      tasks: [
-        {
-          id: Math.random().toString(),
-          taskName: this.state.newTask,
-          taskDetails: this.state.newDetails,
-          date: new Date(),
-        },
-        ...this.state.tasks,
-      ],
-    });
-    console.log("Added");
-  };
-
   render() {
     const { tasks } = this.state;
-
     return (
       <>
-        <form onSubmit={this.handleSubmit}>
-          <input
-            id="task"
-            type="text"
-            placeholder="add task"
-            onChange={this.addNewTask}
-          />
-          <input
-            placeholder="add details"
-            id="details"
-            type="text"
-            onChange={this.addNewDetails}
-          />
-
-          <Button type="submit" variant="contained">
-            Add Task
-          </Button>
-        </form>
+        <AddTask onAddTask={this.handleAddTask} />
         {tasks.map((task, index) => (
           <TaskItem getTask={task} getIndex={index} key={index}>
             <DeleteBtn
