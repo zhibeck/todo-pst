@@ -47,6 +47,7 @@ class TaskItem extends React.Component {
 
           <Button
             variant="contained"
+            size="small"
             onClick={() =>
               this.setState({
                 showDetails: !showDetails,

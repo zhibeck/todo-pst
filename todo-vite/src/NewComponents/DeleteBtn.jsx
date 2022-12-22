@@ -26,7 +26,7 @@ class DeleteBtn extends React.Component {
         size="small"
         color="primary"
       >
-        <DeleteIcon variant="outlined" fontSize="small" />
+        <DeleteIcon variant="outlined" color="error" fontSize="small" />
       </IconButton>
     );
   }

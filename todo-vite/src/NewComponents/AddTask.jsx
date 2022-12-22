@@ -1,5 +1,6 @@
 import React from "react";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Box } from "@mui/material";
+import styles from "./AddTask.module.css";
 
 class AddTask extends React.Component {
   constructor(props) {
@@ -7,12 +8,13 @@ class AddTask extends React.Component {
     this.state = {
       newTask: "",
       newDetails: "",
+      rows: 1,
     };
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    if (this.state.newTask.trim().length < 0) return;
+    if (this.state.newTask.trim().length === 0) return;
 
     const newTask = {
       id: Math.random().toString(),
@@ -25,36 +27,57 @@ class AddTask extends React.Component {
     // cleaning inputs
     this.setState({ newDetails: "" });
     this.setState({ newTask: "" });
+    this.setState({ rows: 1 });
   };
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <Box
+        component="form"
+        className={styles.form}
+        onSubmit={this.handleSubmit}
+        sx={{
+          "& > :not(style)": { m: 1, width: "25ch" },
+        }}
+        // className={styles.form}
+      >
         <TextField
           required
-          label="Required"
+          label="Task"
+          style={{ minWidth: "270px" }}
           size="small"
           id="task"
-          type="text"
-          placeholder="add task"
           value={this.state.newTask}
           onChange={(e) => {
             this.setState({ newTask: e.target.value });
           }}
         />
         <TextField
+          className={styles["detail-input"]}
           size="small"
           label="Details"
+          onFocus={() => {
+            this.setState({
+              rows: 4,
+            });
+          }}
+          rows={this.state.rows}
+          multiline
           id="details"
           value={this.state.newDetails}
           onChange={(e) => {
             this.setState({ newDetails: e.target.value });
           }}
         />
-        <Button type="submit" variant="contained">
+        <Button
+          style={{ minWidth: "120px", height: "40px" }}
+          className={styles["add-button"]}
+          type="submit"
+          variant="contained"
+        >
           Add Task
         </Button>
-      </form>
+      </Box>
     );
   }
 }
