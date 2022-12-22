@@ -2,7 +2,7 @@ import React from "react";
 import { ListItem, ListItemText, Button } from "@mui/material";
 import styles from "./TaskItem.module.css";
 import DateCreated from "./DateCreated";
-
+import Details from "./Details";
 class TaskItem extends React.Component {
   constructor(props) {
     super(props);
@@ -61,7 +61,7 @@ class TaskItem extends React.Component {
         </ListItem>
         {/* //Need to style, add transition and make it appear below the list item */}
         {showDetails && (
-          <div className={styles.details}>{task.taskDetails}</div>
+          <Details className={styles.details} getDetails={task.taskDetails} />
         )}
       </>
     );

@@ -5,6 +5,7 @@ import TaskItem from "./TaskItem";
 import DeleteBtn from "./DeleteBtn";
 import EditBtn from "./EditBtn";
 import AddTask from "./AddTask";
+import Details from "./Details";
 const TASKS_DATA = [
   {
     id: "e1",
@@ -29,6 +30,7 @@ class TaskList extends React.Component {
       tasks: TASKS_DATA,
       newTask: "",
       newDetails: "",
+      isShowDetails: false,
     };
   }
   handleDelete = (tasksArray) => {
@@ -53,6 +55,7 @@ class TaskList extends React.Component {
       tasks: [newTask, ...this.state.tasks],
     });
   };
+
   render() {
     const { tasks } = this.state;
     return (
@@ -78,3 +81,24 @@ class TaskList extends React.Component {
   }
 }
 export default TaskList;
+
+// render() {
+//     const { isShowDetails } = this.state;
+//     const task = this.props.getTask;
+//     return (
+//       <>
+//         <Button
+//           variant="contained"
+//           size="small"
+//           onClick={() =>
+//             this.setState({
+//               isShowDetails: !isShowDetails,
+//             })
+//           }
+//         >
+//           {isShowDetails ? "Hide" : "Details"}
+//         </Button>
+//       </>
+//     );
+//   }
+// }
