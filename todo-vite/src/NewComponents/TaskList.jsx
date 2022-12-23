@@ -43,15 +43,18 @@ class TaskList extends React.Component {
   handleComplete = (isComplete, index) => {
     console.log(isComplete, index);
 
+    //bad code, we should not change state outside of setState
     this.state.tasks[index].isComplete = isComplete;
 
     console.log(this.state.tasks);
   };
 
   handleCompleteFilter = (filteredData) => {
-    this.setState({
-      tasks: filteredData,
-    });
+    if (filteredData.length > 0) {
+      this.setState({
+        tasks: filteredData,
+      });
+    }
   };
 
   handleTask = (tasksArray) => {
