@@ -12,6 +12,16 @@ class TaskItem extends React.Component {
     };
   }
 
+  handleComplete = (event) => {
+    const isComplete = event.target.checked;
+    const id = this.props.task.id;
+    this.props.onComplete(isComplete, id);
+
+    this.setState({
+      isComplete: !this.state.isComplete,
+    });
+  };
+
   render() {
     const { task, index } = this.props;
 
@@ -24,12 +34,7 @@ class TaskItem extends React.Component {
           <input
             type="checkbox"
             className={styles["complete-checkbox"]}
-            onClick={() => {
-              this.setState({
-                isComplete: !isComplete,
-              });
-              // console.log(isComplete);
-            }}
+            onClick={this.handleComplete}
           />
           <ListItemText
             // className={styles["item-list"]}

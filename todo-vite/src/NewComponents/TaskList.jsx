@@ -5,7 +5,7 @@ import TaskItem from "./TaskItem";
 import DeleteBtn from "./DeleteBtn";
 import EditBtn from "./EditBtn";
 import AddTask from "./AddTask";
-import Details from "./Details";
+import SortComponent from "./SortComponent";
 const TASKS_DATA = [
   {
     id: "e1",
@@ -28,8 +28,6 @@ class TaskList extends React.Component {
     super(props);
     this.state = {
       tasks: TASKS_DATA,
-      newTask: "",
-      newDetails: "",
       isShowDetails: false,
     };
   }
@@ -38,6 +36,16 @@ class TaskList extends React.Component {
       tasks: tasksArray,
     });
   };
+
+  // needed for sorting array
+  handleComplete = (isComplete, id) => {
+    console.log(isComplete);
+
+    // this.setState({
+    //   tasks: [this.tasks],
+    // });
+  };
+
   handleTask = (tasksArray) => {
     console.log(tasksArray);
     this.setState({
@@ -61,8 +69,14 @@ class TaskList extends React.Component {
     return (
       <>
         <AddTask onAddTask={this.handleAddTask} />
+        <SortComponent />
         {tasks.map((task, index) => (
-          <TaskItem task={task} index={index} key={index}>
+          <TaskItem
+            task={task}
+            index={index}
+            key={task.id}
+            onComplete={this.handleComplete}
+          >
             <DeleteBtn
               onDelete={this.handleDelete}
               getTasks={tasks}
