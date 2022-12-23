@@ -10,7 +10,11 @@ class SortComponent extends React.Component {
   }
 
   sortCompletedTasks = () => {
-    console.log("Sorted");
+    const tasks = this.props.tasks;
+
+    const filteredData = tasks.filter((elem) => elem.isComplete == true);
+
+    this.props.onCompleteFilter(filteredData);
   };
 
   render() {

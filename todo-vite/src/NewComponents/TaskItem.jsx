@@ -14,8 +14,8 @@ class TaskItem extends React.Component {
 
   handleComplete = (event) => {
     const isComplete = event.target.checked;
-    const id = this.props.task.id;
-    this.props.onComplete(isComplete, id);
+    const index = this.props.index;
+    this.props.onComplete(isComplete, index);
 
     this.setState({
       isComplete: !this.state.isComplete,

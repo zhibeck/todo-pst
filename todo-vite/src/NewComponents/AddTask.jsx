@@ -19,6 +19,7 @@ class AddTask extends React.Component {
     const newTask = {
       id: Math.random().toString(),
       taskName: this.state.newTask,
+      isComplete: false,
       taskDetails: this.state.newDetails,
       date: new Date(),
     };

@@ -9,6 +9,7 @@ import SortComponent from "./SortComponent";
 const TASKS_DATA = [
   {
     id: "e1",
+    isComplete: false,
     taskName: "Need to finish Todo List",
     taskDetails:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry." +
@@ -17,6 +18,7 @@ const TASKS_DATA = [
   },
   {
     id: "e2",
+    isComplete: false,
     taskName: "Need to finish React Course",
     taskDetails: "React Course on Udemy till December 31 2022",
     date: new Date(2022, 7, 14),
@@ -38,12 +40,18 @@ class TaskList extends React.Component {
   };
 
   // needed for sorting array
-  handleComplete = (isComplete, id) => {
-    console.log(isComplete);
+  handleComplete = (isComplete, index) => {
+    console.log(isComplete, index);
 
-    // this.setState({
-    //   tasks: [this.tasks],
-    // });
+    this.state.tasks[index].isComplete = isComplete;
+
+    console.log(this.state.tasks);
+  };
+
+  handleCompleteFilter = (filteredData) => {
+    this.setState({
+      tasks: filteredData,
+    });
   };
 
   handleTask = (tasksArray) => {
@@ -66,10 +74,14 @@ class TaskList extends React.Component {
 
   render() {
     const { tasks } = this.state;
+
     return (
       <>
         <AddTask onAddTask={this.handleAddTask} />
-        <SortComponent />
+        <SortComponent
+          tasks={tasks}
+          onCompleteFilter={this.handleCompleteFilter}
+        />
         {tasks.map((task, index) => (
           <TaskItem
             task={task}
