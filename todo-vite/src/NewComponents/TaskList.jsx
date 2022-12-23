@@ -5,7 +5,8 @@ import TaskItem from "./TaskItem";
 import DeleteBtn from "./DeleteBtn";
 import EditBtn from "./EditBtn";
 import AddTask from "./AddTask";
-import SortComponent from "./SortComponent";
+import FilterTasks from "./FilterTasks";
+
 const TASKS_DATA = [
   {
     id: "e1",
@@ -23,6 +24,20 @@ const TASKS_DATA = [
     taskDetails: "React Course on Udemy till December 31 2022",
     date: new Date(2022, 7, 14),
   },
+  {
+    id: "e3",
+    isComplete: false,
+    taskName: "Need to find job",
+    taskDetails: "React Course on Udemy till December 31 2022",
+    date: new Date(2022, 7, 14),
+  },
+  {
+    id: "e4",
+    isComplete: false,
+    taskName: "Need to get rich",
+    taskDetails: "React Course on Udemy till December 31 2022",
+    date: new Date(2022, 7, 14),
+  },
 ];
 
 class TaskList extends React.Component {
@@ -30,31 +45,47 @@ class TaskList extends React.Component {
     super(props);
     this.state = {
       tasks: TASKS_DATA,
+      filterButton: "All",
       isShowDetails: false,
+      filteredData: TASKS_DATA,
     };
   }
   handleDelete = (tasksArray) => {
     this.setState({
       tasks: tasksArray,
+      filteredData: tasksArray,
     });
   };
 
   // needed for sorting array
   handleComplete = (isComplete, index) => {
-    console.log(isComplete, index);
+    //console.log(isComplete, index);
 
     //bad code, we should not change state outside of setState
     this.state.tasks[index].isComplete = isComplete;
 
-    console.log(this.state.tasks);
+    //console.log(this.state.tasks);
   };
 
-  handleCompleteFilter = (filteredData) => {
-    if (filteredData.length > 0) {
-      this.setState({
-        tasks: filteredData,
-      });
-    }
+  handleButtonFilter = (clickedButtonFilter) => {
+    this.setState({
+      filterButton: clickedButtonFilter,
+    });
+
+    const filteredTasks = this.state.tasks.filter((task) => {
+      if (clickedButtonFilter === "Completed") {
+        return task.isComplete === true;
+      }
+      if (clickedButtonFilter === "Incompleted") {
+        return task.isComplete === false;
+      }
+
+      return task;
+    });
+
+    this.setState({
+      filteredData: filteredTasks,
+    });
   };
 
   handleTask = (tasksArray) => {
@@ -63,6 +94,7 @@ class TaskList extends React.Component {
       tasks: tasksArray,
     });
   };
+
   handleDetails = (tasksArray) => {
     console.log(tasksArray);
     this.setState({
@@ -72,39 +104,61 @@ class TaskList extends React.Component {
   handleAddTask = (newTask) => {
     this.setState({
       tasks: [newTask, ...this.state.tasks],
+      filteredData: [newTask, ...this.state.filteredData],
     });
   };
 
   render() {
-    const { tasks } = this.state;
+    const { tasks, filterButton, filteredData } = this.state;
+    //Bad Code, because it will run everytime when i change state of anything
+    // const filteredTasks = tasks.filter((task) => {
+    //   if (filterButton === "Completed") {
+    //     return task.isComplete === true;
+    //   }
+    //   if (filterButton === "Incompleted") {
+    //     return task.isComplete === false;
+    //   }
+    //   console.log("Running");
+
+    //   return task;
+    // });
+
+    let emptyContent;
+    if (filteredData.length === 0) {
+      if (filterButton === "Completed") {
+        emptyContent = <h2>Lazy Ass! You have no task completed!</h2>;
+      } else {
+        emptyContent = <h2>Smarty pants, go take a rest!</h2>;
+      }
+    }
+    console.log("Rendering");
 
     return (
       <>
         <AddTask onAddTask={this.handleAddTask} />
-        <SortComponent
-          tasks={tasks}
-          onCompleteFilter={this.handleCompleteFilter}
-        />
-        {tasks.map((task, index) => (
-          <TaskItem
-            task={task}
-            index={index}
-            key={task.id}
-            onComplete={this.handleComplete}
-          >
-            <DeleteBtn
-              onDelete={this.handleDelete}
-              getTasks={tasks}
-              getIndex={index}
-            />
-            <EditBtn
-              getTasks={tasks}
-              getIndex={index}
-              onTask={this.handleTask}
-              onDetails={this.handleDetails}
-            />
-          </TaskItem>
-        ))}
+        <FilterTasks onFilterButton={this.handleButtonFilter} />
+        {filteredData.length > 0
+          ? filteredData.map((task, index) => (
+              <TaskItem
+                task={task}
+                index={index}
+                key={task.id}
+                onComplete={this.handleComplete}
+              >
+                <DeleteBtn
+                  onDelete={this.handleDelete}
+                  getTasks={tasks}
+                  getIndex={index}
+                />
+                <EditBtn
+                  getTasks={tasks}
+                  getIndex={index}
+                  onTask={this.handleTask}
+                  onDetails={this.handleDetails}
+                />
+              </TaskItem>
+            ))
+          : emptyContent}
       </>
     );
   }

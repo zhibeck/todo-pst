@@ -2,9 +2,19 @@ import React from "react";
 import { TextField, Button, Box } from "@mui/material";
 import styles from "./AddTask.module.css";
 
+const utilizeFocus = () => {
+  const ref = React.createRef();
+  const setFocus = () => {
+    ref.current && ref.current.focus();
+  };
+
+  return { setFocus, ref };
+};
+
 class AddTask extends React.Component {
   constructor(props) {
     super(props);
+    this.inputFocus = utilizeFocus();
     this.state = {
       newTask: "",
       newDetails: "",
@@ -26,6 +36,7 @@ class AddTask extends React.Component {
 
     this.props.onAddTask(newTask);
     // cleaning inputs
+
     this.setState({ newDetails: "" });
     this.setState({ newTask: "" });
     this.setState({ rows: 1 });
@@ -47,6 +58,8 @@ class AddTask extends React.Component {
           label="Task"
           style={{ minWidth: "270px" }}
           size="small"
+          autoFocus
+          ref={this.inputFocus.ref}
           id="task"
           value={this.state.newTask}
           onChange={(e) => {
@@ -75,6 +88,7 @@ class AddTask extends React.Component {
           className={styles["add-button"]}
           type="submit"
           variant="contained"
+          onClick={this.inputFocus.setFocus}
         >
           Add Task
         </Button>

@@ -25,7 +25,7 @@ class TaskItem extends React.Component {
   render() {
     const { task, index } = this.props;
 
-    const { showDetails, isComplete } = this.state;
+    const { showDetails } = this.state;
 
     return (
       <>
@@ -33,13 +33,16 @@ class TaskItem extends React.Component {
           <span>{index + 1}</span>
           <input
             type="checkbox"
+            defaultChecked={task.isComplete}
             className={styles["complete-checkbox"]}
             onClick={this.handleComplete}
           />
           <ListItemText
             // className={styles["item-list"]}
             className={
-              isComplete ? styles["item-list-completed"] : styles["item-list"]
+              task.isComplete
+                ? styles["item-list-completed"]
+                : styles["item-list"]
             }
             primaryTypographyProps={{ fontSize: "20px" }}
           >
