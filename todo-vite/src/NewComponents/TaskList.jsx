@@ -62,7 +62,7 @@ class TaskList extends React.Component {
       <>
         <AddTask onAddTask={this.handleAddTask} />
         {tasks.map((task, index) => (
-          <TaskItem getTask={task} getIndex={index} key={index}>
+          <TaskItem task={task} index={index} key={index}>
             <DeleteBtn
               onDelete={this.handleDelete}
               getTasks={tasks}

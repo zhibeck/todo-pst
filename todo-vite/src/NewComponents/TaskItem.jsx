@@ -13,13 +13,14 @@ class TaskItem extends React.Component {
   }
 
   render() {
-    const { getTask } = this.props;
-    const task = getTask;
+    const { task, index } = this.props;
+
     const { showDetails, isComplete } = this.state;
 
     return (
       <>
         <ListItem className={styles.list} key={task.id}>
+          <span>{index + 1}</span>
           <input
             type="checkbox"
             className={styles["complete-checkbox"]}
@@ -40,9 +41,6 @@ class TaskItem extends React.Component {
             {task.taskName}
 
             <DateCreated className={styles["item-date"]} getDate={task.date} />
-            {/* {showDetails && (
-              <div className={styles.details}>{task.taskDetails}</div>
-            )} */}
           </ListItemText>
 
           <Button
