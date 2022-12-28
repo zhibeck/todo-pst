@@ -1,4 +1,5 @@
 import React from "react";
+import "./Details.css";
 
 class Details extends React.Component {
   constructor(props) {
@@ -8,7 +9,7 @@ class Details extends React.Component {
   render() {
     const details = this.props.getDetails;
 
-    return <div>{details}</div>;
+    return <div className="task-details">{details}</div>;
   }
 }
 
