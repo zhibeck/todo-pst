@@ -86,6 +86,7 @@ class AddTask extends React.Component {
         <Button
           style={{ minWidth: "120px", height: "40px" }}
           className={styles["add-button"]}
+          disableFocusRipple
           type="submit"
           variant="contained"
           onClick={this.inputFocus.setFocus}

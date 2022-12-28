@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import styles from "./FilterTasks.module.css";
 
 class FilterTasks extends React.Component {
@@ -49,7 +49,6 @@ class FilterTasks extends React.Component {
 
     return (
       <section className={styles["filter-section"]}>
-        <h5 className={styles["show-tasks"]}>SHOW TASKS: </h5>
         <Button
           type="text"
           variant={completeActive ? "outlined" : "text"}
@@ -69,7 +68,7 @@ class FilterTasks extends React.Component {
         >
           All
         </Button>
-      </section>
+      </Stack>
     );
   }
 }
