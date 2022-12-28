@@ -19,7 +19,7 @@ class Todo extends React.Component {
   render() {
     return (
       <div>
-        <Typography variant="h2">TODO Things</Typography>
+        <Typography variant="h2">My To-Do list:</Typography>
         <List
           sx={{
             width: "100%",
