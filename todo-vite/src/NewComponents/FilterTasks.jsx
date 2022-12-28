@@ -68,7 +68,7 @@ class FilterTasks extends React.Component {
         >
           All
         </Button>
-      </Stack>
+      </section>
     );
   }
 }
