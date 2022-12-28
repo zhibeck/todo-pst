@@ -2,8 +2,3 @@
   display: flex;
   justify-content: center;
 }
-
-.show-tasks {
-  color: rgb(83, 85, 88);
-  font-family: sans-serif;
-}
