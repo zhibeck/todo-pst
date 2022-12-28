@@ -6,15 +6,8 @@ class EditBtn extends React.Component {
     super(props);
     this.state = {
       isEditing: false,
-      editedTask: "",
     };
   }
-
-  // handleChange = (e) => {
-  //   this.setState({
-  //     editedTask: e.target.value,
-  //   });
-  // };
 
   editTaskName = (event) => {
     const newTask = event.target.value;
@@ -58,16 +51,8 @@ class EditBtn extends React.Component {
         </Button>
         {isEditing && (
           <div>
-            <input
-              type="text"
-              onChange={this.editTaskName}
-              placeholder="Edit task name:"
-            />
-            <input
-              type="text"
-              onChange={this.editDetails}
-              placeholder="Edit task details:"
-            />
+            <input type="text" onChange={this.editTaskName} />
+            <input type="text" onChange={this.editDetails} />
           </div>
         )}
       </>

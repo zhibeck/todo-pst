@@ -126,9 +126,9 @@ class TaskList extends React.Component {
     let emptyContent;
     if (filteredData.length === 0) {
       if (filterButton === "Completed") {
-        emptyContent = <h2> Nothing was completed 😔 </h2>;
+        emptyContent = <h2>Lazy Ass! You have no task completed!</h2>;
       } else {
-        emptyContent = <h2>Wow, you deserve a break! 👏 </h2>;
+        emptyContent = <h2>Smarty pants, go take a rest!</h2>;
       }
     }
     console.log("Rendering");
