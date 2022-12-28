@@ -49,6 +49,7 @@ class FilterTasks extends React.Component {
 
     return (
       <section className={styles["filter-section"]}>
+        <h5 className={styles["show-tasks"]}>SHOW TASKS: </h5>
         <Button
           type="text"
           variant={completeActive ? "outlined" : "text"}
